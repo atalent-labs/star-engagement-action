@@ -1,0 +1,10 @@
+options:
+  username: olivierodo
+  token: xxx-yyy-zzz
+  repo: restqa/restqa
+  webhook: http://mock-host.com/discord/webhook
+  filename: ./content.yml
+
+expected:
+  status: fail
+  message: 'The Github issue could not be created'

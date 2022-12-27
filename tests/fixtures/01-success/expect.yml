@@ -1,0 +1,9 @@
+options:
+  username: olivierodo
+  token: xxx-yyy-zzz
+  repo: restqa/restqa
+  webhook: http://mock-host.com/discord/webhook
+  filename: ./content.yml
+
+expected:
+  status: success
