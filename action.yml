@@ -1,5 +1,8 @@
 name: 'Thank You Supporter'
 description: 'GROWTH HACK - Engage everyone that give a star to your project'
+branding:
+  icon: 'star'
+  color: 'green'
 inputs:
   template:
     description: 'The template containing the content that need to be used'
