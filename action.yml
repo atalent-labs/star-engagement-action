@@ -15,4 +15,4 @@ inputs:
     default: './.github/template/thankyou-star.yaml'
 runs:
   using: 'node16'
-  main: 'index.js'
+  main: 'dist/index.cjs'

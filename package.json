@@ -2,10 +2,11 @@
   "name": "star-thankyou",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "dist/index.cjs",
   "type": "module",
   "scripts": {
-    "start": "node index.js",
+    "build": "esbuild index.js  --platform=node --bundle --outfile=dist/index.cjs",
+    "start": "node dist/index.cjs",
     "start:dev": "nodemon node -r dotenv/config index.js",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js tests/",
     "test:watch": "node --experimental-vm-modules node_modules/jest/bin/jest.js --watch tests/"
@@ -14,6 +15,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "esbuild": "^0.16.11",
     "jest": "^29.3.1",
     "nodemon": "^2.0.20",
     "testcontainers": "^9.1.1"
