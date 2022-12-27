@@ -57,4 +57,4 @@ test.each(fixtures)('Tests %s', async (fixture) => {
     } else {
       await expect(Star(options)).rejects.toThrow(expected.message)
     }
-})
+}, 30000)
