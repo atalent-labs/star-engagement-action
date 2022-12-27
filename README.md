@@ -1,13 +1,13 @@
 # Thank You Supporter - Growth Hack
 
-> This action has a communinity management focus.
+> A Github Action that engage new supporter when they star your project
 
 Basically everytime someone will Star ⭐ your repository this action will:
 
-* Send you a notification on discord
+* Notify you on discord
 * Look after the profile of your supporter
 	* Check if this supporter has a personal profile repository
-  * Create an issue in the personal profile repository
+  * Create an issue in the personal profile repository with your selected message
 
 ## Inputs
 
@@ -15,7 +15,7 @@ Basically everytime someone will Star ⭐ your repository this action will:
 
 * **Description** The template file used your personal content
 * **Required** yes
-* **Default** `./.github/template/thankyou-template.yml`
+* **Default** `./.github/templates/thankyou-template.yml`
 
 In your template we you can use placeholders:
 
@@ -41,7 +41,9 @@ issue:
 ### `discord-webhook`
 
 * **Description** The URL of the webhook channel where you want to receive the notification
-* **Required** no
+* **Required** yes
+
+> ⚠️ Since the Discord webhook is a credential we recommend you to store it in the secrets.
 
 ### `personal-github-token`
 
@@ -50,21 +52,25 @@ issue:
 
 > ⚠️ Since the Github action token has limited scope, This token needs to be a personal token from the actual user you want to post the issue on his behalf.
 
-## Outputs
-
-### `time`
-
-The time we greeted you.
-
 ## Example usage
 
 
 ```yaml
-uses: olivierodo/thank-you-supporter@v1.0
-with:
-  template: './.github/template/thankyou-template.yml'
-  discord-webhook: 'https://webhook.discord.com/example/...'
-  personal-github-token: ${{ secrets.GH_PERSONAL_TOKEN }} # Where GH_PERSONAL_TOKEN represent a personal token that you store in your secrets
+name: Thank you for the star
+
+on:
+  watch:
+    types: [started]
+jobs:
+  thanks:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: olivierodo/star-thankyou-action@0.0.1
+      with:
+        template: './.github/templates/thankyou-support.yml'
+        discord-webhook: ${{ secrets.DISCORD_WEBHOOK }}
+        personal-github-token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
 ```
 
 ### Try it by yourself
@@ -72,3 +78,16 @@ with:
 Try to star on of the following project to see it in action.
 
 * [RestQA](https://github.com/restqa/restqa)
+
+---
+
+# Development
+
+In order to run the code locally you can
+
+* Install the dependencies: `npm i`
+* Run the test `npm test`
+* Try it out:
+  * Copy the env variables: `cp .env.example .env`
+  * Edit the `.env` 
+  * Run the script `npm run start:dev`

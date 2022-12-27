@@ -1,7 +1,7 @@
 {
-  "name": "star-thankyou",
-  "version": "1.0.0",
-  "description": "",
+  "name": "star-thankyou-action",
+  "version": "0.0.1",
+  "description": "A Github Action that engage new supporter when they star your project",
   "main": "dist/index.cjs",
   "type": "module",
   "scripts": {
@@ -9,15 +9,13 @@
     "start": "node dist/index.cjs",
     "start:dev": "nodemon node -r dotenv/config index.js",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js tests/",
-    "test:watch": "node --experimental-vm-modules node_modules/jest/bin/jest.js --watch tests/",
-    "prepare": "husky install"
+    "test:watch": "node --experimental-vm-modules node_modules/jest/bin/jest.js --watch tests/"
   },
   "keywords": [],
-  "author": "",
+  "author": "Olivier Rodomond",
   "license": "ISC",
   "devDependencies": {
     "esbuild": "^0.16.11",
-    "husky": "^8.0.2",
     "jest": "^29.3.1",
     "nodemon": "^2.0.20",
     "testcontainers": "^9.1.1"
