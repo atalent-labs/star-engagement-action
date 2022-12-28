@@ -2,12 +2,27 @@
 
 > A Github Action that engage new supporter when they star your project
 
+
 Basically everytime someone will Star ⭐ your repository this action will:
 
 * Notify you on discord
 * Look after the profile of your supporter
 	* Check if this supporter has a personal profile repository
   * Create an issue in the personal profile repository with your selected message
+
+## Flow
+
+```mermaid
+graph TD
+    Project[Your Github Project] -->|"When you Get a new star ⭐️"| Action("star-thankyou-action")
+    Action --> Discord["💬 Notification your community on discord"]
+    Action --> Github{Stargazer has a github profile repo?}
+    Github -->|Yes| OK["🚀 Engage him thru an issue on his github profile repo"]
+    Github -->|No| KO["🤷‍♂️ Do nothing"]
+```
+
+* A Stargazer is the person that gave a star to your project.
+
 
 ## Inputs
 
@@ -75,7 +90,7 @@ jobs:
 
 ### Try it by yourself
 
-Try to star on of the following project to see it in action.
+Try to star one of the following project to see it in action.
 
 * [RestQA](https://github.com/restqa/restqa)
 
