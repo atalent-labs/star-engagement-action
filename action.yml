@@ -11,11 +11,9 @@ inputs:
   personal-github-token:
     description: 'The Github personal token used for creating issues on third party repo'
     required: true
-    default: './.github/template/thankyou-template.yml'
   discord-webhook:
     description: 'The Webhook url of the your discord channel'
     required: true
-    default: './.github/template/thankyou-star.yaml'
 runs:
   using: 'node16'
   main: 'dist/index.cjs'
