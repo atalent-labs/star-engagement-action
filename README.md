@@ -27,19 +27,19 @@ Basically everytime a Github User will Star ⭐ your repository this action will
 
 ## 🏁 Flow
 
+* A **Stargazer** is a person that give a star to a project.
+
 ```mermaid
 graph TD
     Project[Your Github Project] -->|"When you Get a new star ⭐️"| Action("star-thankyou-action")
     Action --> Discord["💬 Notify you on discord"]
-    Action --> Github["Check Github profile"]
-    Github --> hasTwitter{Profile contain twitter account?}
+    Action --> Github["Check Stargazer Github profile"]
+    Github --> hasTwitter{Stargazer Profile contain twitter account?}
     hasTwitter -->|Yes| Twitter["🐣 Notification and tag on twitter"]
     Github --> GithubProfile{Stargazer has a custom profile repo?}
-    GithubProfile -->|Yes| ProfileRepo["🚀 Engage him thru an issue on his github custom profile repo"]
+    GithubProfile -->|Yes| ProfileRepo["🚀 Engage Stargazer thru an issue on his github custom profile repo"]
     Github --> GithubFollow["Follow the stargazer"]
 ```
-
-* A Stargazer is the person that gave a star to your project.
 
 ## ⌨️ Inputs
 
