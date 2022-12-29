@@ -2,7 +2,19 @@
 
 > A Github Action that engage new supporter when they star your project
 
-Basically everytime someone will Star ⭐ your repository this action will:
+## 📜 Background
+
+Basically, giving a star to a project is the first step of support from any Github user.
+
+When a user decide to give a star to your project, it means he has a minimum of interest in your project.
+
+That interest is exactly what matter the most for small Open source project that has a hard time to engage or getting feedback on their work.
+
+So it's time for us, small open source project, to be pro-active, engage and thanks anyone that give us some light 🔥.
+
+## 💁 Description
+
+Basically everytime a Github User will Star ⭐ your repository this action will:
 
 * Notify you on discord
 * Look after the Github profile of your supporter
@@ -13,7 +25,7 @@ Basically everytime someone will Star ⭐ your repository this action will:
   * Check if the supporter link his twitter account to his Github account
     * Create a tweet tagging our supporter
 
-## Flow
+## 🏁 Flow
 
 ```mermaid
 graph TD
@@ -29,7 +41,7 @@ graph TD
 
 * A Stargazer is the person that gave a star to your project.
 
-## Inputs
+## ⌨️ Inputs
 
 ### `template`
 
@@ -105,7 +117,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - uses: olivierodo/star-thankyou-action@0.0.1
+    - uses: atalent-labs/star-engagement-action@0.0.1
       with:
         template: './.github/templates/thankyou-support.yml'
         discord-webhook: ${{ secrets.DISCORD_WEBHOOK }}
@@ -117,7 +129,7 @@ jobs:
 ```
 
 
-## Template schema
+## 💟 Template schema
 
 The template should be store in your repository as a yaml file.
 
@@ -211,7 +223,7 @@ Try to star one of the following project to see it in action.
 
 ---
 
-# Development
+## Contribution Development
 
 In order to run the code locally you can
 
@@ -221,3 +233,12 @@ In order to run the code locally you can
   * Copy the env variables: `cp .env.example .env`
   * Edit the `.env` 
   * Run the script `npm run start:dev`
+
+
+## Author
+
+- [@olivierodo](https://www.github.com/olivierodo) - 🇫🇷
+
+## License
+
+[MIT License](./LICENSE)
