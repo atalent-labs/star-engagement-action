@@ -1,6 +1,6 @@
-# Engage your supporter 🤗
+<img src="https://user-images.githubusercontent.com/4768226/209924674-413e0936-c1cd-4d45-a879-a22d1e47ce61.png" width="100%" />
 
-> A Github Action that engage new supporter when they star your project
+> A Github Action that engage early supporter when they star your project
 
 ## 📜 Background
 
