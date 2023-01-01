@@ -120,9 +120,9 @@ Ensure you token has the following permissions:
 
 By supporting this action you are consenting to:
 
-* Add the hashtag # to your tweets
-* Add a link to this action in the github issue created
-* Add a link to this action in the discord notification
+* Add the hashtag `#earlycontributor` to the tweets created by this action
+* Add a link to this action in the github issue created by this action
+* Add a link to this action in the discord notification created by this action
 
 ## Example usage
 
