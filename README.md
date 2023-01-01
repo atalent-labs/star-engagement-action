@@ -57,16 +57,6 @@ graph TD
 
 [Access to the template yaml schema](#template-schema)
 
-
-### `discord-webhook`
-
-* **Description** The URL of the webhook channel where you want to receive the notification
-* **Required** no
-* **Condition** If not specify any notification will be sent to the Discord channel
-
-
-> ⚠️ Since the Discord webhook is a credential we recommend you to store it in the secrets.
-
 ### `personal-github-token`
 
 * **Description** The personal account token use for creating issues on 3rd party repo.
@@ -76,8 +66,18 @@ graph TD
 Ensure you token has the following permissions:
 
 * user:follow
+* public_repo
 
 > ⚠️ Since the Github action token has limited scope, This token needs to be a personal token from the actual user you want to post the issue on his behalf.
+
+### `discord-webhook`
+
+* **Description** The URL of the webhook channel where you want to receive the notification
+* **Required** no
+* **Condition** If not specify any notification will be sent to the Discord channel
+
+
+> ⚠️ Since the Discord webhook is a credential we recommend you to store it in the secrets.
 
 ### `twitter-app-key`
 
