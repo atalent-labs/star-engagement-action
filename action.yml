@@ -1,5 +1,5 @@
-name: 'Thank You early supporters action'
-description: 'An Action to engage early supporters giving a star to your repo.'
+name: 'Thank You Early Supporters Action'
+description: 'An Action that engage your early supporters when they star your repo.'
 branding:
   icon: 'star'
   color: 'green'

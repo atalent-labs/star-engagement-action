@@ -1,7 +1,7 @@
 {
   "name": "star-thankyou-action",
   "version": "0.0.1",
-  "description": "A Github Action that engage new supporter when they star your project",
+  "description": "An Action that engage your early supporters when they star your repo.",
   "main": "dist/index.cjs",
   "type": "module",
   "scripts": {
