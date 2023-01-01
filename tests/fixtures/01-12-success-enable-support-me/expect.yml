@@ -8,7 +8,6 @@ options:
   twitterAppSecret: tw-app-secret
   twitterOauthToken: tw-oauth-token
   twitterOauthSecret: tw-oauth-secret
-  supportMe: false
 
 expected:
   status: success
@@ -22,7 +21,10 @@ expected:
     "POST /discord/webhook": 
       request:
         body:
-          content: "Congratulation **restqa/restqa** got a new star ⭐ from **[olivierodo](https://github.com/olivierodo/olivierodo)**"
+          content: |
+            Congratulation **restqa/restqa** got a new star ⭐ from **[olivierodo](https://github.com/olivierodo/olivierodo)**
+            ---
+            Notification crafted with ❤️ by [Thank You early supporters action](https://github.com/marketplace/actions/thank-you-early-supporters-action)
           tts: false
     "POST /repos/olivierodo/olivierodo/issues":
       request:
@@ -33,6 +35,8 @@ expected:
   
             Thank for sharing your interest into restqa/restqa.
             Giving a star means a lot for us.
+            ---
+            Notification crafted with ❤️ by [Thank You early supporters action](https://github.com/marketplace/actions/thank-you-early-supporters-action)
           assignees:
             - olivierodo
           labels: 
@@ -46,9 +50,9 @@ expected:
     "POST /1.1/statuses/update.json":
       request:
         body:
-          status: We have a new support thank you @olivierodo-twt for starrin our project.
+          status: "We have a new support thank you @olivierodo-twt for starrin our project. #earlycontributor"
           tweet_mode: extended
     "GET /1.1/search/tweets.json":
       request: 
         queries:
-          q: "\"We have a new support thank you @olivierodo-twt for starrin our project.\""
+          q: "\"We have a new support thank you @olivierodo-twt for starrin our project. #earlycontributor\""

@@ -14,13 +14,14 @@ export default async function Star (options) {
     twitterAppKey = process.env.TWITTER_APP_KEY,
     twitterAppSecret = process.env.TWITTER_APP_SECRET,
     twitterOauthToken = process.env.TWITTER_OAUTH_TOKEN,
-    twitterOauthSecret = process.env.TWITTER_OAUTH_SECRET
+    twitterOauthSecret = process.env.TWITTER_OAUTH_SECRET,
+    supportMe = process.env.SUPPORT_ME || true
   } = options
     
   const github = new Github({ username, token, repo})
   const twitterUsername = await github.getTwitterUsername()
 
-  const content = new Content({ filename, repo, username, twitterUsername})
+  const content = new Content({ filename, repo, username, twitterUsername, supportMe})
 
   // DISCORD flow
   if (webhook) {

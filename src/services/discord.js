@@ -24,7 +24,7 @@ class Discord {
       const options = {
         json: {
 	        tts: false,
-          content: this.content.trim()
+          content: this.content
         }
       }
       const { body } = await got.post(this.webhook, options)

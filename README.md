@@ -81,7 +81,7 @@ Ensure you token has the following permissions:
 
 ### `twitter-app-key`
 
-* **Description** The URL of the webhook channel where you want to receive the notification
+* **Description** The twitter consumer key
 * **Required** no
 * **Condition** If not specify no action related to twitter will be made
 
@@ -89,7 +89,7 @@ Ensure you token has the following permissions:
 
 ### `twitter-app-secret`
 
-* **Description** The URL of the webhook channel where you want to receive the notification
+* **Description** The twitter consumer secret
 * **Required** no
 * **Condition** If not specify no action related to twitter will be made
 
@@ -97,7 +97,7 @@ Ensure you token has the following permissions:
 
 ### `twitter-oauth-token`
 
-* **Description** The URL of the webhook channel where you want to receive the notification
+* **Description** The twitter access token 
 * **Required** no
 * **Condition** If not specify no action related to twitter will be made
 
@@ -105,11 +105,24 @@ Ensure you token has the following permissions:
 
 ### `twitter-oauth-secret`
 
-* **Description** The URL of the webhook channel where you want to receive the notification
+* **Description** The twitter access token  secret
 * **Required** no
 * **Condition** If not specify no action related to twitter will be made
 
 > ⚠️ Since the twitter oauth secret  is a credential we recommend you to store it in the secrets.
+
+### `support-me`
+
+* **Description** Support this action will help us to get a bit more light in this open source ocean
+* **Required** no
+* **Type** boolean
+* **Default** true
+
+By supporting this action you are consenting to:
+
+* Add the hashtag # to your tweets
+* Add a link to this action in the github issue created
+* Add a link to this action in the discord notification
 
 ## Example usage
 
@@ -134,6 +147,7 @@ jobs:
         twitter-app-secret: ${{ secrets.TWITTER_APP_SECRET }}
         twitter-oauth-token: ${{ secrets.TWITTER_OAUTH_TOKEN }}
         twitter-oauth-secret: ${{ secrets.TWITTER_OAUTH_SECRET }}
+        support-me: true
 ```
 
 

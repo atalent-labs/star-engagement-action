@@ -13,7 +13,8 @@ import github from '@actions/github'
       twitterAppKey: core.getInput('twitter-app-key') || undefined,
       twitterAppSecret: core.getInput('twitter-app-secret') || undefined,
       twitterOauthToken: core.getInput('twitter-oauth-token') || undefined,
-      twitterOauthSecret: core.getInput('twitter-oauth-secret') || undefined
+      twitterOauthSecret: core.getInput('twitter-oauth-secret') || undefined,
+      supportMe: core.getInput('supportMe')
     }
     await Star(options)
   } catch(error) {
