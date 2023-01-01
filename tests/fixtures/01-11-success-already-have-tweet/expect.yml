@@ -8,6 +8,7 @@ options:
   twitterAppSecret: tw-app-secret
   twitterOauthToken: tw-oauth-token
   twitterOauthSecret: tw-oauth-secret
+  supportMe: false
 
 expected:
   status: success

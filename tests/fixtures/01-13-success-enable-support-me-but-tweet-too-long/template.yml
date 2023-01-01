@@ -2,7 +2,7 @@ notification:
   discord: |
     Congratulation **{{ github-repo }}** got a new star ⭐ from **[{{ github-username }}](https://github.com/{{github-username}}/{{github-username}})**
   twitter: |
-    We have a new support thank you @{{ twitter-username }} for starrin our project.
+    We have a new support thank you @{{ twitter-username }}. What we are trying in this test is that we would like to check if the content of a tweet is very long already we should not add an extra hashtag even if the user would like to support us with the option supportME.. let's see
 github:
   follow: true
   add-star: true

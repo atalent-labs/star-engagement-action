@@ -1,5 +1,5 @@
-name: 'Thank You Supporter'
-description: 'GROWTH HACK - Engage everyone that give a star to your project'
+name: 'Thank You early supporters action'
+description: 'An Action to engage early supporters giving a star to your repo.'
 branding:
   icon: 'star'
   color: 'green'
@@ -10,10 +10,26 @@ inputs:
     default: './.github/template/thankyou-star.yaml'
   personal-github-token:
     description: 'The Github personal token used for creating issues on third party repo'
-    required: true
+    required: false
   discord-webhook:
     description: 'The Webhook url of the your discord channel'
-    required: true
+    required: false
+  twitter-app-key:
+    description: 'The twitter consumer key'
+    required: false
+  twitter-app-secret:
+    description: 'The twitter consumer secret'
+    required: false
+  twitter-oauth-token:
+    description: 'The twitter access token'
+    required: false
+  twitter-oauth-secret:
+    description: 'The twitter access token secret'
+    required: false
+  support-me:
+    description: 'Support this action will help us to get a bit more light in this open source ocean'
+    required: false
+    default: true
 runs:
   using: 'node16'
   main: 'dist/index.cjs'
