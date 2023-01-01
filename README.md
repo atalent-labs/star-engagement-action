@@ -19,8 +19,8 @@ Basically everytime a Github User will Star ⭐ your repository this action will
 * Notify you on discord
 * Look after the Github profile of your supporter
   * Follow them
-	* Check if this supporter has a personal profile repository
-	  * Give a star to they personal profile repository
+  * Check if this supporter has a personal profile repository
+    * Give a star to they personal profile repository
     * Create an issue in the personal profile repository with your selected message
   * Check if the supporter link his twitter account to his Github account
     * Create a tweet tagging our supporter
