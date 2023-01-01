@@ -31,7 +31,7 @@ Basically everytime a Github User will Star ⭐ your repository this action will
 
 ```mermaid
 graph TD
-    Project[Your Github Project] -->|"When you Get a new star ⭐️"| Action("star-thankyou-action")
+    Project[Your Github Project] -->|"When you Get a new star ⭐️"| Action("star-engagement-action")
     Action --> Discord["💬 Notify you on discord"]
     Action --> Github["Check Stargazer Github profile"]
     Github --> hasTwitter{Stargazer Profile contain twitter account?}
