@@ -1,0 +1,29 @@
+options:
+  username: olivierodo
+  repo: restqa/restqa
+  webhook: http://mock-host.com/discord/webhook
+  filename: ./template.yml
+  twitterAppKey: tw-app-key
+  twitterAppSecret: tw-app-secret
+  twitterOauthToken: tw-oauth-token
+  twitterOauthSecret: tw-oauth-secret
+
+expected:
+  status: success
+  mocks:
+    "POST /discord/webhook": 
+      request:
+        body:
+          content: "Congratulation **restqa/restqa** got a new star ⭐ from **[olivierodo](https://github.com/olivierodo/olivierodo)**"
+          tts: false
+    "GET /users/olivierodo":
+      request: {}
+    "POST /1.1/statuses/update.json":
+      request:
+        body:
+          status: We have a new support thank you @olivierodo-twt for starrin our project.
+          tweet_mode: extended
+    "GET /1.1/search/tweets.json":
+      request: 
+        queries:
+          q: "\"We have a new support thank you @olivierodo-twt for starrin our project.\""

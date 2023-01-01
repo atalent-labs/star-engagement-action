@@ -14,3 +14,9 @@ module.exports = Router()
       id: 1234
     })
   })
+  .get('/users/olivierodo', (req, res) => {
+    return res
+      .json({
+        twitter_username: 'olivierodo-twt'
+       })
+  })

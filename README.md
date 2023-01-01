@@ -41,6 +41,10 @@ graph TD
     Github --> GithubFollow["Follow the stargazer"]
 ```
 
+👉  Good To know: In order to avoid countless notification, the script will:
+  * check if no tweet with the same content does not exits
+  * Check if no issue opened by you does not exits
+
 ## ⌨️ Inputs
 
 ### `template`
@@ -68,6 +72,10 @@ graph TD
 * **Description** The personal account token use for creating issues on 3rd party repo.
 * **Required** no
 * **Condition** If not specify no action related to gihthub will be made
+
+Ensure you token has the following permissions:
+
+* user:follow
 
 > ⚠️ Since the Github action token has limited scope, This token needs to be a personal token from the actual user you want to post the issue on his behalf.
 
@@ -185,7 +193,7 @@ Just configure the `issue` object  on the github section:
 
 ```yaml
 github:
-  issue:
+  create-issue:
     title: {{ github-repo }} > Thank you for your contribution
     body: |
       Hi {{github-username}} 👋,
@@ -204,8 +212,8 @@ notification:
     We have a new support thank you @{{ twitter-username }} for starrin our project.
 github:
   follow: true
-  star: true
-  issue:
+  add-star: true
+  create-issue:
     title: {{ github-repo }} > Thank you for your contribution
     body: |
       Hi {{github-username}} 👋,
@@ -234,6 +242,29 @@ In order to run the code locally you can
   * Edit the `.env` 
   * Run the script `npm run start:dev`
 
+### Testing
+
+In order to increase the understaing the Unit test has been made through a small framework from scratch leveraging TestContainer in order to mock external API calls.
+
+Each test are isolated by folder in `tests/fixtures`
+
+Run the tests
+
+```
+npm test
+```
+
+Run the tests (Watch mode)
+
+```
+npm run test:watch
+```
+
+Run the tests (debug mode)
+
+```
+npm run test:debug
+```
 
 ## Author
 

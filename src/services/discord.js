@@ -7,11 +7,11 @@ class Discord {
 
   constructor(options) {
     this.#webhook = options.webhook
+    this.#content = options.content
   }
 
-  setContent (content) {
-    this.#content = content.getDiscordNotification()
-    return this
+  get content () {
+    return this.#content.discord
   }
 
   get webhook () {
@@ -19,11 +19,12 @@ class Discord {
   }
 
   async notify() {
+    if (undefined === this.content) return
     try {
       const options = {
         json: {
 	        tts: false,
-          content: this.#content
+          content: this.content.trim()
         }
       }
       const { body } = await got.post(this.webhook, options)

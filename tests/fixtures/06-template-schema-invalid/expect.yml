@@ -1,0 +1,17 @@
+options:
+  username: olivierodo
+  token: xxx-yyy-zzz
+  repo: restqa/restqa
+  webhook: http://mock-host.com/discord/webhook
+  filename: ./content.yml
+  twitterAppKey: tw-app-key
+  twitterAppSecret: tw-app-secret
+  twitterOauthToken: tw-oauth-token
+  twitterOauthSecret: tw-oauth-secret
+
+expected:
+  status: fail
+  message: '"notification.discords" is not allowed'
+  mocks:
+    "GET /users/olivierodo":
+      request: {}

@@ -23,15 +23,38 @@ class Github extends Abstract {
     return this.#instance
   }
 
-  setContent (content) {
-    this.#content = content.getGithubIssue()
-    return this
+  set content (value) {
+    this.#content = value
+  }
+
+  get content () {
+    return this.#content.github
+  }
+
+  get host () {
+    return process.env.GITHUB_API || 'https://api.github.com'
   }
 
   getUserRepo () {
-    const host = process.env.GITHUB_API || 'https://api.github.com'
-    const url =  `${host}/repos/${this.username}/${this.username}`
-    return url
+    return `${this.host}/repos/${this.username}/${this.username}`
+  }
+
+  async follow() {
+    if (false === this.content.follow) return 
+    const url = `${this.host}/user/following/${this.username}`
+    let result = false
+    try {
+      const { body } = await this.instance.put(url).json()
+    } catch (e) {
+      throw new Error(`The Github user ${this.username} can't be followed`)
+    }
+    return result
+  }
+
+  async getTwitterUsername() {
+    const url = `${this.host}/users/${this.username}`
+    const { twitter_username } = await got.get(url).json()
+    return twitter_username || undefined
   }
 
   async hasProfileRepository() {
@@ -44,12 +67,32 @@ class Github extends Abstract {
     return result
   }
 
+  async addStar() {
+    if (false === this.content['add-star']) return 
+    const url = `${this.host}/user/starred/${this.username}/${this.username}`
+    let result = false
+    try {
+      const { body } = await this.instance.put(url).json()
+    } catch (e) {
+      result = true
+      throw new Error(`The Github user profile repository can't be starred`)
+    }
+    return result
+
+  }
+
   async createIssue() {
     try {
-      const content = this.#content
+      const issueContent =  this.content['create-issue']
+      if (undefined === issueContent) return 
+
       const url = this.getUserRepo() + '/issues'
+      const issues = await this.instance.get(url + '?label=documentation').json()
+      const alreadyHasIssue = issues.some(({title}) =>  title.includes(this.repo))
+      if (alreadyHasIssue) return 
+
       const json = {
-        ...content,
+        ...issueContent,
         assignees: [
           this.username
         ],

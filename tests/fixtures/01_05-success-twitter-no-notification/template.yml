@@ -1,0 +1,14 @@
+notification:
+  discord: |
+    Congratulation **{{ github-repo }}** got a new star ⭐ from **[{{ github-username }}](https://github.com/{{github-username}}/{{github-username}})**
+github:
+  follow: true
+  add-star: true
+  create-issue:
+    title: {{ github-repo }} > Thank you for your contribution
+    body: |
+      Hi {{github-username}} 👋,
+  
+      Thank for sharing your interest into {{ github-repo }}.
+      Giving a star means a lot for us.
+

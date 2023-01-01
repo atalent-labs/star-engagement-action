@@ -1,0 +1,17 @@
+options:
+  username: olivierodo
+  token: xxx-yyy-zzz
+  repo: restqa/restqa
+  webhook: http://mock-host.com/discord/webhook
+  filename: ./content-no-exist.yml
+  twitterAppKey: tw-app-key
+  twitterAppSecret: tw-app-secret
+  twitterOauthToken: tw-oauth-token
+  twitterOauthSecret: tw-oauth-secret
+
+expected:
+  status: fail
+  message: 'The template file "content-no-exist.yml" does not exists'
+  mocks:
+    "GET /users/olivierodo":
+      request: {}
