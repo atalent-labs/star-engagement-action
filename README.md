@@ -138,7 +138,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - uses: atalent-labs/star-engagement-action@0.0.1
+    - name: Engage your supporters
+      uses: atalent-labs/star-engagement-action@0.0.1
       with:
         template: './.github/templates/thankyou-support.yml'
         discord-webhook: ${{ secrets.DISCORD_WEBHOOK }}
