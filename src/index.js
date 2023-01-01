@@ -1,4 +1,5 @@
 import Discord from './services/discord.js'
+import Twitter from './services/twitter.js'
 import Github from './services/github.js'
 import Content from './services/content.js'
 
@@ -9,30 +10,48 @@ export default async function Star (options) {
     token = process.env.GH_TOKEN,
     username = process.env.GH_USERNAME,
     repo = process.env.GH_REPO,
-    webhook = process.env.DISCORD_WEBHOOK
+    webhook = process.env.DISCORD_WEBHOOK,
+    twitterAppKey = process.env.TWITTER_APP_KEY,
+    twitterAppSecret = process.env.TWITTER_APP_SECRET,
+    twitterOauthToken = process.env.TWITTER_OAUTH_TOKEN,
+    twitterOauthSecret = process.env.TWITTER_OAUTH_SECRET
   } = options
     
-  const content = new Content({ filename, repo, username })
+  const github = new Github({ username, token, repo})
+  const twitterUsername = await github.getTwitterUsername()
 
-  // Notification Discord
-  let opt = {
-    repo,
-    username
+  const content = new Content({ filename, repo, username, twitterUsername})
+
+  // DISCORD flow
+  if (webhook) {
+    const discord = new Discord({ webhook, content })
+    await discord.notify()
   }
-  const discord = new Discord({ webhook })
-  await discord
-    .setContent(content)
-    .notify()
 
-  // Issue creation
-  const github = new Github({ username, token})
-  const result = await github.hasProfileRepository()
-  if (true === result) {
-    await github
-      .setContent(content)
-      .createIssue(token)
-  } else {
-    console.log('The user %s does not have a personal profile', options.username)
+  // TWITTER flow
+  if (twitterAppKey && twitterAppSecret && twitterOauthToken && twitterOauthSecret) {
+    const credential = {
+      twitterAppKey,
+      twitterAppSecret,
+      twitterOauthToken,
+      twitterOauthSecret
+    }
+    const twitter = new Twitter({ content, credential })
+    twitterUsername && await twitter.notify()
+  }
+
+  // GITHUB FLOW
+  if (token) {
+    github.content = content
+    await github.follow()
+
+    const result = await github.hasProfileRepository()
+    if (true === result) {
+      await github.addStar()
+      await github.createIssue()
+    } else {
+      console.log('The user %s does not have a personal profile', options.username)
+    }
   }
   return true
 }

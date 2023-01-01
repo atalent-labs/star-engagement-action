@@ -1,0 +1,53 @@
+options:
+  username: olivierodo
+  token: xxx-yyy-zzz
+  repo: restqa/restqa
+  webhook: http://mock-host.com/discord/webhook
+  filename: ./template.yml
+  twitterAppKey: tw-app-key
+  twitterAppSecret: tw-app-secret
+  twitterOauthToken: tw-oauth-token
+  twitterOauthSecret: tw-oauth-secret
+
+expected:
+  status: success
+  mocks:
+    "GET /repos/olivierodo/olivierodo":
+      request: {}
+    "PUT /user/following/olivierodo": 
+      request: {}
+    "PUT /user/starred/olivierodo/olivierodo": 
+      request: {}
+    "POST /discord/webhook": 
+      request:
+        body:
+          content: "Congratulation **restqa/restqa** got a new star ⭐ from **[olivierodo](https://github.com/olivierodo/olivierodo)**"
+          tts: false
+    "POST /repos/olivierodo/olivierodo/issues":
+      request:
+        body:
+          title: "restqa/restqa > Thank you for your contribution"
+          body: |
+            Hi olivierodo 👋,
+  
+            Thank for sharing your interest into restqa/restqa.
+            Giving a star means a lot for us.
+          assignees:
+            - olivierodo
+          labels: 
+            - documentation
+    "GET /repos/olivierodo/olivierodo/issues":
+      request:
+        queries:
+          label: 'documentation'
+    "GET /users/olivierodo":
+      request: {}
+    "POST /1.1/statuses/update.json":
+      request:
+        body:
+          status: We have a new support thank you @olivierodo-twt for starrin our project.
+          tweet_mode: extended
+    "GET /1.1/search/tweets.json":
+      request: 
+        queries:
+          q: "\"We have a new support thank you @olivierodo-twt for starrin our project.\""

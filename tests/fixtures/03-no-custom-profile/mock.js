@@ -10,10 +10,18 @@ module.exports = Router()
         success: true
       })
   })
+  .put('/user/following/olivierodo', (req, res) => {
+    return res.sendStatus(204)
+  })
   .get('/repos/olivierodo/olivierodo', (req, res) => {
     return res
       .status(403)
       .json({
         message: 'An error happened'
       })
+  })
+  .get('/users/olivierodo', (req, res) => {
+    return res
+      .json({
+       })
   })

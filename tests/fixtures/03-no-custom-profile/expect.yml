@@ -3,7 +3,23 @@ options:
   token: xxx-yyy-zzz
   repo: restqa/restqa
   webhook: http://mock-host.com/discord/webhook
-  filename: ./content.yml
+  filename: ./template.yml
+  twitterAppKey: tw-app-key
+  twitterAppSecret: tw-app-secret
+  twitterOauthToken: tw-oauth-token
+  twitterOauthSecret: tw-oauth-secret
 
 expected:
   status: success
+  mocks:
+    "GET /repos/olivierodo/olivierodo":
+      request: {}
+    "PUT /user/following/olivierodo": 
+      request: {}
+    "POST /discord/webhook": 
+      request:
+        body:
+          content: "Congratulation **restqa/restqa** got a new star ⭐ from **[olivierodo](https://github.com/olivierodo/olivierodo)**"
+          tts: false
+    "GET /users/olivierodo":
+      request: {}
