@@ -8,10 +8,12 @@ class Twitter {
   #host = null
   #client = null
   #credential = null
+  #logger = null
 
   constructor(options) {
     this.#content = options.content
     this.#credential = options.credential
+    this.#logger = options.logger
   }
 
   get #creds () {
@@ -45,6 +47,7 @@ class Twitter {
       const alreadyTweeted = await this.checkAlreadyTweeted()
       if (alreadyTweeted) return
       await this.client.v1.tweet(this.content.trim());
+      this.#logger.write('✅ Twitter Notification sent successfully')
     } catch(e) {
       //console.log(e)
       throw new Error('The tweet fails.')

@@ -6,10 +6,12 @@ class Github extends Abstract {
   #instance = null
   #content = null
   #token = null
+  #logger = null
 
   constructor(options) {
     super(options)
     this.#token = options.token
+    this.#logger = options.logger
   }
 
   get instance () {
@@ -45,6 +47,7 @@ class Github extends Abstract {
     let result = false
     try {
       const { body } = await this.instance.put(url).json()
+      this.#logger.write('✅ Github profile followed successfully')
     } catch (e) {
       throw new Error(`The Github user ${this.username} can't be followed`)
     }
@@ -73,6 +76,7 @@ class Github extends Abstract {
     let result = false
     try {
       const { body } = await this.instance.put(url).json()
+      this.#logger.write('✅ Github profile repo starred successfully')
     } catch (e) {
       result = true
       throw new Error(`The Github user profile repository can't be starred`)
@@ -101,6 +105,7 @@ class Github extends Abstract {
         ]
       }
       const { body } = await this.instance.post(url, { json })
+      this.#logger.write('✅ Github profile repo issue created successfully')
       return body
     } catch(e) {
       throw new Error('The Github issue could not be created')

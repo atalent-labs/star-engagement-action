@@ -15,17 +15,18 @@ export default async function Star (options) {
     twitterAppSecret = process.env.TWITTER_APP_SECRET,
     twitterOauthToken = process.env.TWITTER_OAUTH_TOKEN,
     twitterOauthSecret = process.env.TWITTER_OAUTH_SECRET,
-    supportMe = process.env.SUPPORT_ME || true
+    supportMe = process.env.SUPPORT_ME || true,
+    logger = process.stdout
   } = options
     
-  const github = new Github({ username, token, repo})
+  const github = new Github({ username, token, repo, logger})
   const twitterUsername = await github.getTwitterUsername()
 
-  const content = new Content({ filename, repo, username, twitterUsername, supportMe})
+  const content = new Content({ filename, repo, username, twitterUsername, supportMe })
 
   // DISCORD flow
   if (webhook) {
-    const discord = new Discord({ webhook, content })
+    const discord = new Discord({ webhook, content, logger})
     await discord.notify()
   }
 
@@ -37,7 +38,7 @@ export default async function Star (options) {
       twitterOauthToken,
       twitterOauthSecret
     }
-    const twitter = new Twitter({ content, credential })
+    const twitter = new Twitter({ content, credential, logger})
     twitterUsername && await twitter.notify()
   }
 

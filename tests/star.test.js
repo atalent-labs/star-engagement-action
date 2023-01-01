@@ -12,7 +12,7 @@ const containers = []
 // If you want to isolate a test
 // put the number on the array below
 const only = [
-  //'01-13'
+  //'00'
 ]
 
 const fixtures = fs
@@ -64,13 +64,22 @@ test.each(fixtures)('Tests %s', async (fixture) => {
     options.webhook = webhook.href
   }
 
+  const logs = []
+  options.logger = {
+    write: (str) => {
+      logs.push(str)
+    }
+  }
+
   if (expected.status === 'success') {
     await expect(Star(options)).resolves.toBe(true)
   } else {
     await expect(Star(options)).rejects.toThrow(expected.message)
   }
+
+  expect(logs).toEqual(expect.arrayContaining(expected.logs || []))
   
-  const logs = await got.get('http://' + host + '/log').json()
-  expect(logs).toEqual(expected.mocks || {})
+  const transactions = await got.get('http://' + host + '/log').json()
+  expect(transactions).toEqual(expected.mocks || {})
 
 }, 30000)

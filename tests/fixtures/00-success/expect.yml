@@ -12,6 +12,12 @@ options:
 
 expected:
   status: success
+  logs:
+    - ✅ Discord Notification sent successfully
+    - ✅ Twitter Notification sent successfully
+    - ✅ Github profile followed successfully
+    - ✅ Github profile repo starred successfully
+    - ✅ Github profile repo issue created successfully
   mocks:
     "GET /repos/olivierodo/olivierodo":
       request: {}

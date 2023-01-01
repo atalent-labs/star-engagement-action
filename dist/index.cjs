@@ -20259,7 +20259,7 @@ ${indent}${body}`;
     }
     function plainString(item, ctx, onComment, onChompKeep) {
       const { type, value } = item;
-      const { actualString, implicitKey, indent, inFlow } = ctx;
+      const { actualString, implicitKey, indent, indentStep, inFlow } = ctx;
       if (implicitKey && /[\n[\]{},]/.test(value) || inFlow && /[[\]{},]/.test(value)) {
         return quotedString(value, ctx);
       }
@@ -20269,9 +20269,13 @@ ${indent}${body}`;
       if (!implicitKey && !inFlow && type !== Scalar.Scalar.PLAIN && value.includes("\n")) {
         return blockString(item, ctx, onComment, onChompKeep);
       }
-      if (indent === "" && containsDocumentMarker(value)) {
-        ctx.forceBlockIndent = true;
-        return blockString(item, ctx, onComment, onChompKeep);
+      if (containsDocumentMarker(value)) {
+        if (indent === "") {
+          ctx.forceBlockIndent = true;
+          return blockString(item, ctx, onComment, onChompKeep);
+        } else if (implicitKey && indent === indentStep) {
+          return quotedString(value, ctx);
+        }
       }
       const str = value.replace(/\n+/g, `$&
 ${indent}`);
@@ -37978,9 +37982,11 @@ var source_default2 = got;
 var Discord = class {
   #webhook = null;
   #content = null;
+  #logger = null;
   constructor(options) {
     this.#webhook = options.webhook;
     this.#content = options.content;
+    this.#logger = options.logger;
   }
   get content() {
     return this.#content.discord;
@@ -37999,6 +38005,7 @@ var Discord = class {
         }
       };
       const { body } = await source_default2.post(this.webhook, options);
+      this.#logger.write("\u2705 Discord Notification sent successfully");
     } catch (e) {
       throw new Error("The Discord webhook fails.");
     }
@@ -38014,9 +38021,11 @@ var Twitter = class {
   #host = null;
   #client = null;
   #credential = null;
+  #logger = null;
   constructor(options) {
     this.#content = options.content;
     this.#credential = options.credential;
+    this.#logger = options.logger;
   }
   get #creds() {
     return {
@@ -38048,6 +38057,7 @@ var Twitter = class {
       if (alreadyTweeted)
         return;
       await this.client.v1.tweet(this.content.trim());
+      this.#logger.write("\u2705 Twitter Notification sent successfully");
     } catch (e) {
       throw new Error("The tweet fails.");
     }
@@ -38100,9 +38110,11 @@ var Github = class extends abstract_default {
   #instance = null;
   #content = null;
   #token = null;
+  #logger = null;
   constructor(options) {
     super(options);
     this.#token = options.token;
+    this.#logger = options.logger;
   }
   get instance() {
     if (!this.#instance) {
@@ -38133,6 +38145,7 @@ var Github = class extends abstract_default {
     let result = false;
     try {
       const { body } = await this.instance.put(url).json();
+      this.#logger.write("\u2705 Github profile followed successfully");
     } catch (e) {
       throw new Error(`The Github user ${this.username} can't be followed`);
     }
@@ -38159,6 +38172,7 @@ var Github = class extends abstract_default {
     let result = false;
     try {
       const { body } = await this.instance.put(url).json();
+      this.#logger.write("\u2705 Github profile repo starred successfully");
     } catch (e) {
       result = true;
       throw new Error(`The Github user profile repository can't be starred`);
@@ -38185,6 +38199,7 @@ var Github = class extends abstract_default {
         ]
       };
       const { body } = await this.instance.post(url, { json });
+      this.#logger.write("\u2705 Github profile repo issue created successfully");
       return body;
     } catch (e) {
       throw new Error("The Github issue could not be created");
@@ -38314,13 +38329,14 @@ async function Star(options) {
     twitterAppSecret = process.env.TWITTER_APP_SECRET,
     twitterOauthToken = process.env.TWITTER_OAUTH_TOKEN,
     twitterOauthSecret = process.env.TWITTER_OAUTH_SECRET,
-    supportMe = process.env.SUPPORT_ME || true
+    supportMe = process.env.SUPPORT_ME || true,
+    logger = process.stdout
   } = options;
-  const github2 = new github_default({ username, token, repo });
+  const github2 = new github_default({ username, token, repo, logger });
   const twitterUsername = await github2.getTwitterUsername();
   const content = new content_default({ filename, repo, username, twitterUsername, supportMe });
   if (webhook) {
-    const discord = new discord_default({ webhook, content });
+    const discord = new discord_default({ webhook, content, logger });
     await discord.notify();
   }
   if (twitterAppKey && twitterAppSecret && twitterOauthToken && twitterOauthSecret) {
@@ -38330,7 +38346,7 @@ async function Star(options) {
       twitterOauthToken,
       twitterOauthSecret
     };
-    const twitter = new twitter_default({ content, credential });
+    const twitter = new twitter_default({ content, credential, logger });
     twitterUsername && await twitter.notify();
   }
   if (token) {
