@@ -38317,6 +38317,14 @@ var Schema = import_joi.default.object({
 });
 var content_default = Content;
 
+// src/utils/logger.js
+var Logger = class {
+  write(str) {
+    process.stdout.write(str + "\n");
+  }
+};
+var logger_default = Logger;
+
 // src/index.js
 async function Star(options) {
   const {
@@ -38330,7 +38338,7 @@ async function Star(options) {
     twitterOauthToken = process.env.TWITTER_OAUTH_TOKEN,
     twitterOauthSecret = process.env.TWITTER_OAUTH_SECRET,
     supportMe = process.env.SUPPORT_ME || true,
-    logger = process.stdout
+    logger = new logger_default()
   } = options;
   const github2 = new github_default({ username, token, repo, logger });
   const twitterUsername = await github2.getTwitterUsername();
@@ -38378,7 +38386,7 @@ var import_github2 = __toESM(require_github(), 1);
       twitterAppSecret: import_core3.default.getInput("twitter-app-secret") || void 0,
       twitterOauthToken: import_core3.default.getInput("twitter-oauth-token") || void 0,
       twitterOauthSecret: import_core3.default.getInput("twitter-oauth-secret") || void 0,
-      supportMe: import_core3.default.getInput("supportMe")
+      supportMe: import_core3.default.getInput("support-me")
     };
     await Star(options);
   } catch (error) {

@@ -2,6 +2,7 @@ import Discord from './services/discord.js'
 import Twitter from './services/twitter.js'
 import Github from './services/github.js'
 import Content from './services/content.js'
+import Logger from './utils/logger.js'
 
 export default async function Star (options) {
 
@@ -16,7 +17,7 @@ export default async function Star (options) {
     twitterOauthToken = process.env.TWITTER_OAUTH_TOKEN,
     twitterOauthSecret = process.env.TWITTER_OAUTH_SECRET,
     supportMe = process.env.SUPPORT_ME || true,
-    logger = process.stdout
+    logger = new Logger()
   } = options
     
   const github = new Github({ username, token, repo, logger})
